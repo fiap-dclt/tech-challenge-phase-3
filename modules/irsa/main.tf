@@ -17,8 +17,7 @@ resource "aws_iam_policy" "analytics_policy" {
     ]
   })
   tags = {
-    Environment = var.env,
-    Project     = var.project
+    Name = "policy-analytics-${var.env}"
   }
 }
 

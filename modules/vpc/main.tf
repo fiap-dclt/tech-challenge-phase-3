@@ -4,9 +4,7 @@ resource "aws_vpc" "main" {
   enable_dns_support   = true
   enable_dns_hostnames = true
   tags = {
-    Name        = "vpc-${var.env}",
-    Project     = var.project,
-    Environment = var.env
+    Name = "vpc-${var.env}"
   }
 }
 
@@ -17,9 +15,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
   availability_zone       = var.azs[count.index]
   tags = {
-    Name        = "subnet-public-${var.env}-${count.index}"
-    Project     = var.project,
-    Environment = var.env
+    Name = "subnet-public-${var.env}-${count.index}"
   }
 }
 
@@ -29,18 +25,14 @@ resource "aws_subnet" "private" {
   cidr_block        = var.private_subnets[count.index]
   availability_zone = var.azs[count.index]
   tags = {
-    Name        = "subnet-private-${var.env}-${count.index}"
-    Project     = var.project,
-    Environment = var.env
+    Name = "subnet-private-${var.env}-${count.index}"
   }
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name        = "igw-${var.env}"
-    Project     = var.project,
-    Environment = var.env
+    Name = "igw-${var.env}"
   }
 }
 
@@ -48,9 +40,7 @@ resource "aws_eip" "ngw" {
   domain     = "vpc"
   depends_on = [aws_internet_gateway.igw]
   tags = {
-    Name        = "eip-ngw-${var.env}"
-    Project     = var.project,
-    Environment = var.env
+    Name = "eip-ngw-${var.env}"
   }
 }
 
@@ -58,9 +48,7 @@ resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.ngw.id
   subnet_id     = aws_subnet.public[0].id
   tags = {
-    Name        = "ngw-${var.env}"
-    Project     = var.project,
-    Environment = var.env
+    Name = "ngw-${var.env}"
   }
 }
 
@@ -71,9 +59,7 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.igw.id
   }
   tags = {
-    Name        = "rt-public-${var.env}"
-    Project     = var.project,
-    Environment = var.env
+    Name = "rt-public-${var.env}"
   }
 }
 
@@ -90,9 +76,7 @@ resource "aws_route_table" "private" {
     nat_gateway_id = aws_nat_gateway.ngw.id
   }
   tags = {
-    Name        = "rt-private-${var.env}"
-    Project     = var.project,
-    Environment = var.env
+    Name = "rt-private-${var.env}"
   }
 }
 

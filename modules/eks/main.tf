@@ -18,7 +18,6 @@ module "eks" {
   }
 
   tags = {
-    Environment = var.env,
-    Project     = var.project
+    Name = "eks-${var.env}"
   }
 }

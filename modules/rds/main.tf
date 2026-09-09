@@ -2,9 +2,7 @@ resource "aws_db_subnet_group" "this" {
   name       = "subnet-group-db-${var.env}"
   subnet_ids = var.private_subnet_ids
   tags = {
-    Name        = "subnet-group-db-${var.env}",
-    Project     = var.project,
-    Environment = var.env
+    Name = "subnet-group-db-${var.env}"
   }
 }
 
@@ -26,9 +24,7 @@ resource "aws_security_group" "rds_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name        = "sg-rds-${var.env}",
-    Project     = var.project,
-    Environment = var.env
+    Name = "sg-rds-${var.env}"
   }
 }
 
@@ -45,8 +41,6 @@ resource "aws_db_instance" "postgres" {
   skip_final_snapshot    = true
   publicly_accessible    = false
   tags = {
-    Name        = "rds-${var.env}-${var.microservice}",
-    Project     = var.project,
-    Environment = var.env
+    Name = "rds-${var.env}-${var.microservice}"
   }
 }

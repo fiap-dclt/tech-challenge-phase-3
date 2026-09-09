@@ -2,9 +2,7 @@ resource "aws_elasticache_subnet_group" "this" {
   name       = "subnet-group-redis-${var.env}"
   subnet_ids = var.private_subnet_ids
   tags = {
-    Name        = "subnet-group-db-${var.env}",
-    Project     = var.project,
-    Environment = var.env
+    Name = "subnet-group-db-${var.env}"
   }
 }
 
@@ -26,9 +24,7 @@ resource "aws_security_group" "redis_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name        = "subnet-group-db-${var.env}",
-    Project     = var.project,
-    Environment = var.env
+    Name = "subnet-group-db-${var.env}"
   }
 }
 
@@ -43,8 +39,6 @@ resource "aws_elasticache_cluster" "redis" {
   subnet_group_name    = aws_elasticache_subnet_group.this.name
   security_group_ids   = [aws_security_group.redis_sg.id]
   tags = {
-    Name        = "subnet-group-db-${var.env}",
-    Project     = var.project,
-    Environment = var.env
+    Name = "subnet-group-db-${var.env}"
   }
 }

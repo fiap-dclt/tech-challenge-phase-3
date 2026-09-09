@@ -1,0 +1,8 @@
+# Ignore the local Terraform working directory (contains plugins and modules)
+**/.terraform/
+
+# Ignore the Terraform provider lock file
+**/.terraform.lock.hcl
+
+# Ignore any .tfstate files, which are used to store the state of your Terraform-managed infrastructure
+**/*.tfstate

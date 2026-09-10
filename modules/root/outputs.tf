@@ -14,8 +14,16 @@ output "vpc_id" {
   value = module.vpc.vpc_id
 }
 
-output "rds_endpoint" {
-  value = module.rds.rds_endpoint
+output "rds_auth_endpoint" {
+  value = module.rds_auth.rds_endpoint
+}
+
+output "rds_flag_endpoint" {
+  value = module.rds_flag.rds_endpoint
+}
+
+output "rds_targeting_endpoint" {
+  value = module.rds_targeting.rds_endpoint
 }
 
 output "redis_endpoint" {

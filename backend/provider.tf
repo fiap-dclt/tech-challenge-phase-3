@@ -1,4 +1,3 @@
-provider "aws" { 
-    region = "us-east-1"
-    profile = "lab"
+provider "aws" {
+  region = "us-east-1"
 }

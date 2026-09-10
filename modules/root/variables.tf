@@ -15,6 +15,10 @@ variable "secret_value" {
   sensitive = true
 }
 
+variable "microservice" {
+  type = string
+}
+
 variable "project" {
   type = string
 }

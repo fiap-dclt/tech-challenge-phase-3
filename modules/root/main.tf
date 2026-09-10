@@ -1,3 +1,13 @@
+module "vpc" {
+  source          = "../vpc"
+  env             = var.env
+  vpc_cidr        = var.vpc_cidr
+  public_subnets  = var.public_subnets
+  private_subnets = var.private_subnets
+  azs             = var.azs
+  project         = var.project
+}
+
 module "sqs" {
   source     = "../sqs"
   env        = var.env
@@ -13,14 +23,21 @@ module "secrets" {
   project      = var.project
 }
 
-module "vpc" {
-  source          = "../vpc"
-  env             = var.env
-  vpc_cidr        = var.vpc_cidr
-  public_subnets  = var.public_subnets
-  private_subnets = var.private_subnets
-  azs             = var.azs
-  project         = var.project
+module "dynamodb" {
+  source     = "../dynamodb"
+  env        = var.env
+  table_name = var.table_name
+  hash_key   = var.hash_key
+  project    = var.project
+}
+
+module "eks" {
+  source             = "../eks"
+  env                = var.env
+  cluster_version    = var.cluster_version
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids = module.vpc.private_subnet_ids
+  project            = var.project
 }
 
 module "rds_auth" {
@@ -72,14 +89,7 @@ module "redis" {
   private_subnet_ids     = module.vpc.private_subnet_ids
   node_security_group_id = module.eks.node_security_group_id
   project                = var.project
-}
-
-module "dynamodb" {
-  source     = "../dynamodb"
-  env        = var.env
-  table_name = var.table_name
-  hash_key   = var.hash_key
-  project    = var.project
+  microservice           = var.microservice
 }
 
 module "irsa" {
@@ -88,14 +98,5 @@ module "irsa" {
   oidc_provider_arn  = module.eks.oidc_provider_arn
   dynamodb_table_arn = module.dynamodb.table_arn
   sqs_queue_arn      = module.sqs.queue_arn
-  project            = var.project
-}
-
-module "eks" {
-  source             = "../eks"
-  env                = var.env
-  cluster_version    = var.cluster_version
-  vpc_id             = module.vpc.vpc_id
-  private_subnet_ids = module.vpc.private_subnet_ids
   project            = var.project
 }

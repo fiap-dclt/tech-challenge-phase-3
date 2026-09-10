@@ -14,6 +14,10 @@ variable "node_security_group_id" {
   type = string
 }
 
+variable "microservice" {
+  type = string
+}
+
 variable "project" {
   type = string
 }

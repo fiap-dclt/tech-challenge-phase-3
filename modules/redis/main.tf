@@ -7,7 +7,7 @@ resource "aws_elasticache_subnet_group" "this" {
 }
 
 resource "aws_security_group" "redis_sg" {
-  name   = "sg-redis-${var.env}"
+  name   = "redis-${var.env}"
   vpc_id = var.vpc_id
 
   ingress {
@@ -24,7 +24,7 @@ resource "aws_security_group" "redis_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "subnet-group-db-${var.env}"
+    Name = "sg-redis-${var.env}-${var.microservice}"
   }
 }
 

@@ -24,11 +24,11 @@ inputs = {
   azs             = ["us-east-1a", "us-east-1b"]
   
   # EKS
-  cluster_version = "1.30"
+  cluster_version = "1.35"
   
   # RDS
   db_engine         = "postgres"
-  db_engine_version = "15.4"
+  db_engine_version = "18.3"
   db_user           = "dbadmin"
   
   # DynamoDB
@@ -37,6 +37,9 @@ inputs = {
   
   # SQS
   queue_name = "analytics-queue"
+
+  # Redis
+  microservice = "evaluation-service"
   
   # Secrets Manager
   secret_name = "db-passwords"

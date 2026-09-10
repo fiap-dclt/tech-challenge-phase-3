@@ -1,13 +1,13 @@
 resource "aws_db_subnet_group" "this" {
-  name       = "subnet-group-db-${var.env}"
+  name       = "subnet-group-db-${var.env}-${var.microservice}"
   subnet_ids = var.private_subnet_ids
   tags = {
-    Name = "subnet-group-db-${var.env}"
+    Name = "subnet-group-db-${var.env}-${var.microservice}"
   }
 }
 
 resource "aws_security_group" "rds_sg" {
-  name   = "sg-rds-${var.env}-${var.microservice}"
+  name   = "rds-${var.env}-${var.microservice}"
   vpc_id = var.vpc_id
 
   ingress {
@@ -24,7 +24,7 @@ resource "aws_security_group" "rds_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "sg-rds-${var.env}"
+    Name = "sg-rds-${var.env}-${var.microservice}"
   }
 }
 

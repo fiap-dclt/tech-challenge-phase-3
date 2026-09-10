@@ -39,7 +39,7 @@ output "dynamodb_table_arn" {
 }
 
 output "irsa_role_arn" {
-  value = module.irsa.irsa_role_arn
+  value = module.irsa.analytics_iam_role_arn
 }
 
 output "eks_cluster_name" {

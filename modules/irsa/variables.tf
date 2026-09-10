@@ -1,21 +1,17 @@
 variable "env" {
-  type        = string
-  description = "Ambiente atual (ex: dev, prod, hml)"
+  type = string
 }
 
 variable "oidc_provider_arn" {
-  type        = string
-  description = "ARN do provedor OIDC gerado pelo módulo do EKS"
+  type = string
 }
 
 variable "dynamodb_table_arn" {
-  type        = string
-  description = "ARN da tabela do DynamoDB que o analytics irá acessar"
+  type = string
 }
 
 variable "sqs_queue_arn" {
-  type        = string
-  description = "ARN da fila SQS para permissão de leitura/escrita"
+  type = string
 }
 
 variable "project" {

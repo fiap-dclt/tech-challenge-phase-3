@@ -3,8 +3,7 @@ variable "env" {
 }
 
 variable "vpc_id" {
-  description = "VPC ID"
-  type        = string
+  type = string
 }
 
 variable "private_subnet_ids" {
@@ -16,6 +15,5 @@ variable "eks_security_group_id" {
 }
 
 variable "project" {
-  description = "Project name"
-  type        = string
+  type = string
 }

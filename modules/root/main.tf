@@ -1,8 +1,3 @@
-provider "aws" {
-  region  = "us-east-1"
-  profile = "lab"
-}
-
 module "sqs" {
   source     = "../sqs"
   env        = var.env
@@ -28,27 +23,55 @@ module "vpc" {
   project         = var.project
 }
 
-module "rds" {
-  source                = "../rds"
-  env                   = var.env
-  vpc_id                = module.vpc.vpc_id
-  private_subnet_ids    = module.vpc.private_subnet_ids
-  eks_security_group_id = module.eks.eks_security_group_id
-  project               = var.project
-  microservice          = var.microservice
-  db_engine             = var.db_engine
-  db_engine_version     = var.db_engine_version
-  db_user               = var.db_user
-  db_pass               = var.db_pass
+module "rds_auth" {
+  source                 = "../rds"
+  env                    = var.env
+  vpc_id                 = module.vpc.vpc_id
+  private_subnet_ids     = module.vpc.private_subnet_ids
+  node_security_group_id = module.eks.node_security_group_id
+  project                = var.project
+  microservice           = "auth-service"
+  db_engine              = var.db_engine
+  db_engine_version      = var.db_engine_version
+  db_user                = var.db_user
+  db_pass                = var.db_pass
+}
+
+module "rds_flag" {
+  source                 = "../rds"
+  env                    = var.env
+  vpc_id                 = module.vpc.vpc_id
+  private_subnet_ids     = module.vpc.private_subnet_ids
+  node_security_group_id = module.eks.node_security_group_id
+  project                = var.project
+  microservice           = "flag-service"
+  db_engine              = var.db_engine
+  db_engine_version      = var.db_engine_version
+  db_user                = var.db_user
+  db_pass                = var.db_pass
+}
+
+module "rds_targeting" {
+  source                 = "../rds"
+  env                    = var.env
+  vpc_id                 = module.vpc.vpc_id
+  private_subnet_ids     = module.vpc.private_subnet_ids
+  node_security_group_id = module.eks.node_security_group_id
+  project                = var.project
+  microservice           = "targeting-service"
+  db_engine              = var.db_engine
+  db_engine_version      = var.db_engine_version
+  db_user                = var.db_user
+  db_pass                = var.db_pass
 }
 
 module "redis" {
-  source                = "../redis"
-  env                   = var.env
-  vpc_id                = module.vpc.vpc_id
-  private_subnet_ids    = module.vpc.private_subnet_ids
-  eks_security_group_id = module.eks.eks_security_group_id
-  project               = var.project
+  source                 = "../redis"
+  env                    = var.env
+  vpc_id                 = module.vpc.vpc_id
+  private_subnet_ids     = module.vpc.private_subnet_ids
+  node_security_group_id = module.eks.node_security_group_id
+  project                = var.project
 }
 
 module "dynamodb" {
@@ -63,8 +86,8 @@ module "irsa" {
   source             = "../irsa"
   env                = var.env
   oidc_provider_arn  = module.eks.oidc_provider_arn
-  dynamodb_table_arn = module.dynamodb.dynamodb_table_arn
-  sqs_queue_arn      = module.sqs.sqs_queue_arn
+  dynamodb_table_arn = module.dynamodb.table_arn
+  sqs_queue_arn      = module.sqs.queue_arn
   project            = var.project
 }
 

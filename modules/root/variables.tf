@@ -11,7 +11,8 @@ variable "secret_name" {
 }
 
 variable "secret_value" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "project" {
@@ -34,10 +35,6 @@ variable "azs" {
   type = list(string)
 }
 
-variable "microservice" {
-  type = string
-}
-
 variable "db_engine" {
   type = string
 }
@@ -51,7 +48,8 @@ variable "db_user" {
 }
 
 variable "db_pass" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "table_name" {

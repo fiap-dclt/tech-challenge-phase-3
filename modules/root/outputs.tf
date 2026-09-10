@@ -22,8 +22,12 @@ output "redis_endpoint" {
   value = module.redis.redis_endpoint
 }
 
-output "dynamodb_endpoint" {
-  value = module.dynamodb.dynamodb_endpoint
+output "dynamodb_table_name" {
+  value = module.dynamodb.table_name
+}
+
+output "dynamodb_table_arn" {
+  value = module.dynamodb.table_arn
 }
 
 output "irsa_role_arn" {
@@ -31,5 +35,5 @@ output "irsa_role_arn" {
 }
 
 output "eks_cluster_name" {
-  value = try(module.eks[0].cluster_name, null)
+  value = try(module.eks.cluster_name, null)
 }

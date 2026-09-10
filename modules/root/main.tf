@@ -1,12 +1,12 @@
 module "sqs" {
-  source     = "../sqs"
+  source     = "${get_path_to_repo_root()}/modules/sqs"
   env        = var.env
   queue_name = var.queue_name
   project    = var.project
 }
 
 module "secrets" {
-  source       = "../secrets"
+  source       = "${get_path_to_repo_root()}/modules/secrets"
   env          = var.env
   secret_name  = var.secret_name
   secret_value = var.secret_value
@@ -14,7 +14,7 @@ module "secrets" {
 }
 
 module "vpc" {
-  source          = "../vpc"
+  source          = "${get_path_to_repo_root()}/modules/vpc"
   env             = var.env
   vpc_cidr        = var.vpc_cidr
   public_subnets  = var.public_subnets
@@ -24,7 +24,7 @@ module "vpc" {
 }
 
 module "rds_auth" {
-  source                 = "../rds"
+  source                 = "${get_path_to_repo_root()}/modules/rds"
   env                    = var.env
   vpc_id                 = module.vpc.vpc_id
   private_subnet_ids     = module.vpc.private_subnet_ids
@@ -38,7 +38,7 @@ module "rds_auth" {
 }
 
 module "rds_flag" {
-  source                 = "../rds"
+  source                 = "${get_path_to_repo_root()}/modules/rds"
   env                    = var.env
   vpc_id                 = module.vpc.vpc_id
   private_subnet_ids     = module.vpc.private_subnet_ids
@@ -52,7 +52,7 @@ module "rds_flag" {
 }
 
 module "rds_targeting" {
-  source                 = "../rds"
+  source                 = "${get_path_to_repo_root()}/modules/rds"
   env                    = var.env
   vpc_id                 = module.vpc.vpc_id
   private_subnet_ids     = module.vpc.private_subnet_ids
@@ -66,7 +66,7 @@ module "rds_targeting" {
 }
 
 module "redis" {
-  source                 = "../redis"
+  source                 = "${get_path_to_repo_root()}/modules/redis"
   env                    = var.env
   vpc_id                 = module.vpc.vpc_id
   private_subnet_ids     = module.vpc.private_subnet_ids
@@ -75,7 +75,7 @@ module "redis" {
 }
 
 module "dynamodb" {
-  source     = "../dynamodb"
+  source     = "${get_path_to_repo_root()}/modules/dynamodb"
   env        = var.env
   table_name = var.table_name
   hash_key   = var.hash_key
@@ -83,7 +83,7 @@ module "dynamodb" {
 }
 
 module "irsa" {
-  source             = "../irsa"
+  source             = "${get_path_to_repo_root()}/modules/irsa"
   env                = var.env
   oidc_provider_arn  = module.eks.oidc_provider_arn
   dynamodb_table_arn = module.dynamodb.table_arn
@@ -92,7 +92,7 @@ module "irsa" {
 }
 
 module "eks" {
-  source             = "../eks"
+  source             = "${get_path_to_repo_root()}/modules/eks"
   env                = var.env
   cluster_version    = var.cluster_version
   vpc_id             = module.vpc.vpc_id

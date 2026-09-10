@@ -2,12 +2,19 @@ include "root" {
   path = find_in_parent_folders()
 }
 
+locals {
+  env_vars = read_terragrunt_config("${get_terragrunt_dir()}/env.hcl", { locals = { env = "prod" } })
+
+  # Extrai a variável env
+  env = local.env_vars.locals.env
+}
+
 terraform {
   source = "../../modules//root"
 }
 
 inputs = {
-  env             = "prod"
+  env             = local.env
   project         = "FIAP Tech Challenge Phase 3"
   
   # VPC

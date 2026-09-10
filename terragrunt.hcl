@@ -1,10 +1,3 @@
-locals {
-  env_vars = read_terragrunt_config("${get_terragrunt_dir()}/env.hcl", { locals = { env = "prod" } })
-
-  # Extrai a variável env
-  env = local.env_vars.locals.env
-}
-
 generate "provider" {
   path      = "provider.tf"
   if_exists = "overwrite_terragrunt"
@@ -14,7 +7,7 @@ generate "provider" {
                 default_tags {
                     tags = {
                     Project     = "FIAP Tech Challenge Phase 3"
-                    Environment = local.env
+                    Environment = var.env
                     ManagedBy   = "Terragrunt"
                     }
                 }

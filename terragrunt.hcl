@@ -22,10 +22,10 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   config = {
-    bucket         = "toggle-master-automated"
-    key            = "${path_relative_to_include()}/terraform.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-    dynamodb_table = "toggle-master-automated-locks"
+    bucket       = "toggle-master-automated"
+    key          = "${path_relative_to_include()}/terraform.tfstate"
+    region       = "us-east-1"
+    encrypt      = true
+    use_lockfile = true
   }
 }

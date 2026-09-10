@@ -1,5 +1,5 @@
 locals {
-  env_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
+  env_vars = read_terragrunt_config("${get_terragrunt_dir()}/env.hcl", { locals = { env = "prod" } })
 
   # Extrai a variável env
   env = local.env_vars.locals.env

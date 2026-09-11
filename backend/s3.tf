@@ -1,6 +1,6 @@
 # Bucket S3 to store the state of Terraform
 resource "aws_s3_bucket" "state" {
-  bucket        = "toggle-master-automated"
+  bucket        = "toggle-master-iac-backend"
   force_destroy = true
   tags = {
     Project = "FIAP Tech Challenge Phase 3"

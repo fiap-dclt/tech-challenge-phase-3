@@ -24,7 +24,7 @@ module "ecr" {
 
   tags = merge(
     {
-      Name = "${var.env}-${each.value}"
+      Name = "ecr-${var.env}-${each.value}"
     }
   )
 }

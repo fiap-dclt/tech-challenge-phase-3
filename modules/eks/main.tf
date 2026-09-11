@@ -18,6 +18,6 @@ module "eks" {
   }
 
   tags = {
-    Name = "eks-${var.env}"
+    Name = "eks-${var.env}-toggle-master"
   }
 }

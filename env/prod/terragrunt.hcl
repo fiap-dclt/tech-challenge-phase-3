@@ -32,11 +32,11 @@ inputs = {
   db_user           = "dbadmin"
   
   # DynamoDB
-  table_name = "toggle-master-analytics"
+  table_name = "toggle-master-analytics-service"
   hash_key   = "id"
   
   # SQS
-  queue_name = "analytics-queue"
+  queue_name = "analytics-service-queue"
 
   # Redis
   microservice = "evaluation-service"

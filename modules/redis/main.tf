@@ -2,12 +2,12 @@ resource "aws_elasticache_subnet_group" "this" {
   name       = "subnet-group-redis-${var.env}"
   subnet_ids = var.private_subnet_ids
   tags = {
-    Name = "subnet-group-db-${var.env}"
+    Name = "subnet-group-redis-${var.env}-${var.microservice}"
   }
 }
 
 resource "aws_security_group" "redis_sg" {
-  name   = "redis-${var.env}"
+  name   = "redis-${var.env}-${var.microservice}"
   vpc_id = var.vpc_id
 
   ingress {
@@ -29,7 +29,7 @@ resource "aws_security_group" "redis_sg" {
 }
 
 resource "aws_elasticache_cluster" "redis" {
-  cluster_id           = "redis-${var.env}"
+  cluster_id           = "redis-${var.env}-${var.microservice}"
   engine               = "redis"
   node_type            = "cache.t3.micro"
   num_cache_nodes      = 1
@@ -39,6 +39,6 @@ resource "aws_elasticache_cluster" "redis" {
   subnet_group_name    = aws_elasticache_subnet_group.this.name
   security_group_ids   = [aws_security_group.redis_sg.id]
   tags = {
-    Name = "subnet-group-db-${var.env}"
+    Name = "redis-${var.env}-${var.microservice}"
   }
 }

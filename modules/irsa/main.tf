@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "analytics_policy" {
-  name        = "policy-analytics-${var.env}"
+  name        = "irsa-policy-analytics-service-${var.env}"
   description = "Permissoes do analytics para SQS e DynamoDB"
   policy = jsonencode({
     Version = "2012-10-17"
@@ -17,7 +17,7 @@ resource "aws_iam_policy" "analytics_policy" {
     ]
   })
   tags = {
-    Name = "policy-analytics-${var.env}"
+    Name = "irsa-policy-analytics-service-${var.env}"
   }
 }
 

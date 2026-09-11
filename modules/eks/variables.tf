@@ -2,7 +2,7 @@ variable "env" {
   type = string
 }
 
-variable "cluster_version" {
+variable "kubernetes_version" {
   type    = string
   default = "1.35"
 }

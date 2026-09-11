@@ -34,7 +34,7 @@ module "dynamodb" {
 module "eks" {
   source             = "../eks"
   env                = var.env
-  cluster_version    = var.cluster_version
+  kubernetes_version = var.kubernetes_version
   vpc_id             = module.vpc.vpc_id
   private_subnet_ids = module.vpc.private_subnet_ids
   project            = var.project
@@ -99,4 +99,11 @@ module "irsa" {
   dynamodb_table_arn = module.dynamodb.table_arn
   sqs_queue_arn      = module.sqs.queue_arn
   project            = var.project
+}
+
+module "ecr" {
+  source           = "../ecr"
+  env              = var.env
+  project          = var.project
+  repository_names = toset(var.repository_names)
 }

@@ -1,12 +1,12 @@
 module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
-  version         = "~> 19.0"
-  cluster_name    = "eks-${var.env}"
-  cluster_version = var.cluster_version
-  subnet_ids      = var.private_subnet_ids
-  vpc_id          = var.vpc_id
+  source             = "terraform-aws-modules/eks/aws"
+  version            = "~> 21.0"
+  name               = "eks-${var.env}"
+  kubernetes_version = var.kubernetes_version
+  subnet_ids         = var.private_subnet_ids
+  vpc_id             = var.vpc_id
 
-  manage_aws_auth_configmap = true
+  enable_cluster_creator_admin_permissions = true
 
   eks_managed_node_groups = {
     default = {

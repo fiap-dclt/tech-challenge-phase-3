@@ -64,6 +64,10 @@ variable "hash_key" {
   type = string
 }
 
-variable "cluster_version" {
+variable "kubernetes_version" {
   type = string
+}
+
+variable "repository_names" {
+  type = list(string)
 }

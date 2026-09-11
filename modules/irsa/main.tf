@@ -22,10 +22,10 @@ resource "aws_iam_policy" "analytics_policy" {
 }
 
 module "irsa_analytics" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.30"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "~> 6.8"
 
-  role_name = "irsa-analytics-${var.env}"
+  name = "irsa-analytics-${var.env}"
 
   oidc_providers = {
     main = {
@@ -35,7 +35,8 @@ module "irsa_analytics" {
     }
   }
 
-  role_policy_arns = {
+  policies = {
     policy = aws_iam_policy.analytics_policy.arn
   }
 }
+

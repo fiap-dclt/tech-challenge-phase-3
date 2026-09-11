@@ -1,5 +1,5 @@
 include "root" {
-  path = find_in_parent_folders()
+  path = find_in_parent_folders("root.hcl")
 }
 
 locals {
@@ -43,4 +43,13 @@ inputs = {
   
   # Secrets Manager
   secret_name = "db-passwords"
+
+  # ECR
+  repository_names = [
+    "auth-service",
+    "flag-service",
+    "targeting-service",
+    "evaluation-service",
+    "analytics-service"
+  ]
 }

@@ -22,7 +22,7 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   config = {
-    bucket       = "toggle-master-automated"
+    bucket       = "toggle-master-iac-backend"
     key          = "${path_relative_to_include()}/terraform.tfstate"
     region       = "us-east-1"
     encrypt      = true
